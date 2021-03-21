@@ -8,5 +8,17 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.englishsupport.ui.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_wordFragment"
+            app:destination="@id/wordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wordFragment"
+        android:name="com.example.englishsupport.ui.details.WordFragment"
+        android:label="WordFragment">
+        <argument
+            android:name="selectedWord"
+            app:argType="com.example.englishsupport.Word" />
+    </fragment>
 </navigation>

@@ -1,7 +1,6 @@
 package com.example.englishsupport.ui
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.englishsupport.R
 import com.example.englishsupport.Word
@@ -17,6 +16,7 @@ class DashboardViewModel (application: Application) : AndroidViewModel(applicati
     private val database = getDatabase(application)
     private val englishSupportRepository = EnglishSupportRepository(database)
     private val MerriamApiKey = application.resources.getString(R.string.merriam_api_key)
+    private val BingApiKey = application.resources.getString(R.string.bing_api_key)
 
     private val _onOptionChanged = MutableLiveData<OptionSelected>()
 
@@ -27,6 +27,10 @@ class DashboardViewModel (application: Application) : AndroidViewModel(applicati
     private val _word = MutableLiveData<Word>()
     val word: LiveData<Word>
         get() = _word
+
+    private val _wordImageUrl = MutableLiveData<String>()
+    val wordImageUrl: LiveData<String>
+        get() = _wordImageUrl
 
     val words: LiveData<List<Word>> = Transformations.switchMap(_onOptionChanged) { option ->
         when (option) {
@@ -51,16 +55,22 @@ class DashboardViewModel (application: Application) : AndroidViewModel(applicati
             if (words.value?.size == 0) {
                 _showNoContent.value = true
             }
-
-//            searchWord("test")
-            _status.value = MerriamWordsStatus.DONE
             showOptionSelected(OptionSelected.RECENT)
+            _status.value = MerriamWordsStatus.DONE
         }
     }
 
     fun searchWord(word: String) {
         viewModelScope.launch {
+            _status.value = MerriamWordsStatus.LOADING
             englishSupportRepository.getWord(word, MerriamApiKey)
+            _status.value = MerriamWordsStatus.DONE
+        }
+    }
+
+    fun getImageFromWord(word: String) {
+        viewModelScope.launch {
+            _wordImageUrl.value = englishSupportRepository.getImageFromWord(word, BingApiKey)
         }
     }
 

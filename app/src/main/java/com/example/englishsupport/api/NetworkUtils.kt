@@ -2,28 +2,30 @@ package com.example.englishsupport.api
 
 import com.example.englishsupport.Constants
 import com.example.englishsupport.Word
+import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
 fun parseWordJsonResult(jsonResult: JSONObject): Word {
-    val wordResult = jsonResult.getJSONArray("meta")
-    System.out.println(wordResult)
-    var wordEntity: Word? = null
+    val wordResult = jsonResult.getJSONObject("meta")
+    val wordDef = jsonResult.getJSONArray("shortdef")
+    val syns = JSONArray(wordResult.getString("syns"))
+    val ants = JSONArray(wordResult.getString("ants"))
 
-    for (i in 0 until wordResult.length()) {
-        val wordList = wordResult.getJSONObject(i)
+    val id = wordResult.getString("id")
+    val word = wordResult.getString("id")
+    val definition = wordDef[0].toString()
+    val synonyms = if (syns.length() > 0) syns[0].toString() else ""
+    val antonyms = if (ants.length() > 0) ants[0].toString() else ""
 
-        val id = wordList.getString("id")
-        val word = wordList.getString("id")
-        val definition = wordList.getString("shortdef")
-        val synonyms = wordList.getString("syns")
-        val antonyms = wordList.getString("ants")
+    return Word(id, word, definition, synonyms, antonyms, getToday())
+}
 
-        wordEntity = Word(id, word, definition, synonyms, antonyms, getToday())
-    }
+fun getImageUrl(jsonResult: JSONObject): String {
+    val imageResult = jsonResult.getJSONObject("value")
 
-    return wordEntity!!
+    return imageResult["webSearchUrl"].toString()
 }
 
 fun getToday(): String {

@@ -5,6 +5,7 @@
     <string name="search_button">Search</string>
     <string name="pick_text">Pick a word!</string>
     <string name="merriam_api_key">392e3a89-a0cc-4dc6-90d6-716ecc138a2d</string>
+    <string name="bing_api_key">0760420ad4b44aea943a85d37eaf9b7e</string>
     <string name="show_recent_words">Show recent words</string>
     <string name="show_last30_words">Show last 30 words</string>
     <string name="show_all_words">Show all words</string>

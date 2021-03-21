@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.englishsupport.Word
-import com.example.englishsupport.api.Network
-import com.example.englishsupport.api.NetworkWordContainer
-import com.example.englishsupport.api.asDatabaseModel
-import com.example.englishsupport.api.parseWordJsonResult
+import com.example.englishsupport.api.*
 import com.example.englishsupport.database.WordsDatabase
 import com.example.englishsupport.database.asDomainModel
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +28,27 @@ class EnglishSupportRepository (private val database: WordsDatabase) {
         it.asDomainModel()
     }
 
+    suspend fun getImageFromWord (word: String, api_key: String): String? {
+        var image:String? = null
+
+        withContext(Dispatchers.IO) {
+
+            try {
+                val result = ImageNetwork.BingApiService.getImageFromWord(word, api_key)
+
+                val imageJson = JSONObject(result)
+
+                image = getImageUrl(imageJson)
+
+            } catch (e: JSONException) {
+
+            }
+
+
+        }
+        return image
+    }
+
     suspend fun getWord (word: String, app_key: String) {
         withContext(Dispatchers.IO) {
             try {
@@ -38,15 +56,14 @@ class EnglishSupportRepository (private val database: WordsDatabase) {
                 val result = Network.MerriamService.getSynonymsAndAntonyms(
                     word, app_key
                 )
-                Log.e("getWord1", result)
 
+                // Convert to Array due to it returns []
                 val jsonWord = JSONArray(result)
-                Log.e("getWord2", jsonWord[0].toString())
 
+                // Convert to Object to work with the string
                 val jsonObject = JSONObject(jsonWord[0].toString())
 
                 val words = parseWordJsonResult(jsonObject)
-                Log.e("getWord3", "words")
 
                 database.wordsDao.insertWord(NetworkWordContainer(words).asDatabaseModel())
 
