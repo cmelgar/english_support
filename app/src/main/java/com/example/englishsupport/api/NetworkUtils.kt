@@ -8,6 +8,7 @@ import java.util.*
 
 fun parseWordJsonResult(jsonResult: JSONObject): Word {
     val wordResult = jsonResult.getJSONArray("meta")
+    System.out.println(wordResult)
     var wordEntity: Word? = null
 
     for (i in 0 until wordResult.length()) {

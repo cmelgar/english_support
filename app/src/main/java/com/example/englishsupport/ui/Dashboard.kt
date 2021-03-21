@@ -1,17 +1,16 @@
 package com.example.englishsupport.ui
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.englishsupport.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.englishsupport.WordClickListener
+import com.example.englishsupport.WordListAdapter
+import com.example.englishsupport.databinding.FragmentMainBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -24,44 +23,62 @@ class MainFragment : Fragment() {
         val activity = requireNotNull(this.activity)
         ViewModelProvider(this, DashboardViewModel.Factory(activity.application)).get(DashboardViewModel::class.java)
     }
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var binding: FragmentMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+
+        binding = FragmentMainBinding.inflate(inflater)
+
+        binding.lifecycleOwner = this
+
+        binding.viewModel = viewModel
+
+        val adapter = WordListAdapter(WordClickListener {
+//            findNavController().navigate()
+            Toast.makeText(context, "Hey", Toast.LENGTH_SHORT).show()
+        })
+
+        binding.wordRecycler.adapter = adapter
+
+        viewModel.words.observe(viewLifecycleOwner, Observer {
+            it?.apply {
+                adapter.submitList(it)
+            }
+        })
+
+        setHasOptionsMenu(true)
+
+        val wordQuery = binding.wordText.text
+
+        binding.searchButton.setOnClickListener {
+            viewModel.searchWord(wordQuery.toString())
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MainFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MainFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_overflow_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.show_all_words -> {
+                viewModel.showOptionSelected(OptionSelected.ALL)
             }
+            R.id.show_last30_words -> {
+                viewModel.showOptionSelected(OptionSelected.LAST_30)
+            }
+            R.id.show_recent_words -> {
+                viewModel.showOptionSelected(OptionSelected.RECENT)
+            }
+        }
+        return true
     }
 }
 

@@ -9,8 +9,11 @@ interface WordsDao {
     @Query("SELECT * FROM DatabaseWords ORDER BY save_date DESC")
     fun getWords(): LiveData<List<DatabaseWords>>
 
+    @Query("SELECT * FROM DatabaseWords ORDER BY save_date DESC LIMIT 30")
+    fun getLastThirtyWords(): LiveData<List<DatabaseWords>>
+
     @Query("SELECT * FROM DatabaseWords ORDER BY save_date DESC LIMIT 10")
-    fun getLastTenWords(): LiveData<List<DatabaseWords>>
+    fun getRecentWords(): LiveData<List<DatabaseWords>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWord(word: DatabaseWords)

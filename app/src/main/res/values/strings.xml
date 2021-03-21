@@ -2,4 +2,11 @@
     <string name="app_name">English support</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_button">Search</string>
+    <string name="pick_text">Pick a word!</string>
+    <string name="merriam_api_key">392e3a89-a0cc-4dc6-90d6-716ecc138a2d</string>
+    <string name="show_recent_words">Show recent words</string>
+    <string name="show_last30_words">Show last 30 words</string>
+    <string name="show_all_words">Show all words</string>
+    <string name="no_content">No content</string>
 </resources>
