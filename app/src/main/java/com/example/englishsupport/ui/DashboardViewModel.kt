@@ -6,6 +6,7 @@ import com.example.englishsupport.R
 import com.example.englishsupport.Word
 import com.example.englishsupport.database.getDatabase
 import com.example.englishsupport.repository.EnglishSupportRepository
+import com.example.englishsupport.ui.main.OptionSelected
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
@@ -50,7 +51,7 @@ class DashboardViewModel (application: Application) : AndroidViewModel(applicati
             if (words.value?.size == 0) {
                 _showNoContent.value = true
             }
-            showOptionSelected(OptionSelected.RECENT)
+            showOptionSelected(OptionSelected.ALL)
             _status.value = MerriamWordsStatus.DONE
         }
     }
@@ -65,9 +66,9 @@ class DashboardViewModel (application: Application) : AndroidViewModel(applicati
 
     fun getImageFromWord(word: String) {
         viewModelScope.launch {
-//            _status.value = MerriamWordsStatus.LOADING
+            _status.value = MerriamWordsStatus.LOADING
             _wordImageUrl.value = englishSupportRepository.getImageFromWord(word, BingApiKey)
-//            _status.value = MerriamWordsStatus.DONE
+            _status.value = MerriamWordsStatus.DONE
         }
     }
 

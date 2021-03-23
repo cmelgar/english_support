@@ -1,4 +1,4 @@
-package com.example.englishsupport.ui
+package com.example.englishsupport.ui.main
 
 import android.app.Activity
 import android.content.Intent
@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,13 +13,8 @@ import com.example.englishsupport.R
 import com.example.englishsupport.WordClickListener
 import com.example.englishsupport.WordListAdapter
 import com.example.englishsupport.databinding.FragmentMainBinding
-import kotlin.math.log
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MainFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+import com.example.englishsupport.ui.DashboardViewModel
+import com.example.englishsupport.ui.main.MainFragmentDirections
 
 private const val SPEECH_REQUEST_CODE = 100
 
@@ -28,7 +22,8 @@ class MainFragment : Fragment() {
 
     private val viewModel: DashboardViewModel by lazy {
         val activity = requireNotNull(this.activity)
-        ViewModelProvider(this, DashboardViewModel.Factory(activity.application)).get(DashboardViewModel::class.java)
+        ViewModelProvider(this, DashboardViewModel.Factory(activity.application)).get(
+            DashboardViewModel::class.java)
     }
 
     lateinit var binding: FragmentMainBinding
