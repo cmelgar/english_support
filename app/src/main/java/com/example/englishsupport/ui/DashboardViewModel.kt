@@ -44,11 +44,6 @@ class DashboardViewModel (application: Application) : AndroidViewModel(applicati
     val showNoContent: LiveData<Boolean>
         get() = _showNoContent
 
-//    private val _words = MutableLiveData<List<com.example.englishsupport.Word>>()
-//    val words: LiveData<List<com.example.englishsupport.Word>>
-//        get() = _words
-
-//
     init {
         _status.value = MerriamWordsStatus.LOADING
         viewModelScope.launch {
@@ -70,8 +65,14 @@ class DashboardViewModel (application: Application) : AndroidViewModel(applicati
 
     fun getImageFromWord(word: String) {
         viewModelScope.launch {
+//            _status.value = MerriamWordsStatus.LOADING
             _wordImageUrl.value = englishSupportRepository.getImageFromWord(word, BingApiKey)
+//            _status.value = MerriamWordsStatus.DONE
         }
+    }
+
+    fun setLoadingStatusDone() {
+        _status.value = MerriamWordsStatus.DONE
     }
 
     fun showOptionSelected(optionSelected: OptionSelected) {

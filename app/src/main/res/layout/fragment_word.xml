@@ -17,16 +17,22 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.Word"
-        android:onClick="@{() -> wordCallback.onClick(word)}">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/background_word"
+        android:onClick="@{() -> wordCallback.onClick(word)}"
+        android:padding="8dp"
+        tools:context=".ui.Word">
 
         <TextView
             android:id="@+id/word_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/horizontal_margin"
-            android:layout_marginTop="@dimen/vertical_margin"
             android:text="@{word.word}"
+            android:textColor="@color/white"
             android:textSize="@dimen/main_word_size"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,35 +40,38 @@
 
         <TextView
             android:id="@+id/definition_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/horizontal_margin"
             android:layout_marginTop="@dimen/inside_vertical_margin"
+            android:layout_marginEnd="@dimen/horizontal_margin"
             android:text="@{word.definition}"
+            android:textColor="@color/white"
             android:textSize="@dimen/definition_word_size"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/word_text" />
 
-        <TextView
-            android:id="@+id/synonyms_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/horizontal_margin"
-            android:layout_marginTop="@dimen/inside_vertical_margin"
-            android:text="@{word.synonyms}"
-            android:textSize="@dimen/list_word_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/definition_text" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/synonyms_text"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="@dimen/horizontal_margin"-->
+        <!--            android:layout_marginTop="@dimen/inside_vertical_margin"-->
+        <!--            android:text="@{word.synonyms}"-->
+        <!--            android:textSize="@dimen/list_word_size"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/definition_text" />-->
 
-        <TextView
-            android:id="@+id/antonyms_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/horizontal_margin"
-            android:layout_marginTop="@dimen/inside_vertical_margin"
-            android:text="@{word.antonyms}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/synonyms_text" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/antonyms_text"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="@dimen/horizontal_margin"-->
+        <!--            android:layout_marginTop="@dimen/inside_vertical_margin"-->
+        <!--            android:text="@{word.antonyms}"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/synonyms_text" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

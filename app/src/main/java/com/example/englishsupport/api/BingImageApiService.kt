@@ -16,7 +16,7 @@ interface BingImageApiService {
     @Headers("Ocp-Apim-Subscription-Key: 95b381b8b0c048488e20e3bca6713f52")
     @GET("v7.0/images/search")
     suspend fun getImageFromWord(
-        @Header("Ocp-Apim-Subscription-Key")api_key: String,
+//        @Header("Ocp-Apim-Subscription-Key")api_key: String,
         @Query("q")word: String): String
 }
 

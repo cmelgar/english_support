@@ -34,7 +34,7 @@ class EnglishSupportRepository (private val database: WordsDatabase) {
         withContext(Dispatchers.IO) {
 
             try {
-                val result = ImageNetwork.BingApiService.getImageFromWord(word, api_key)
+                val result = ImageNetwork.BingApiService.getImageFromWord(word)
 
                 val imageJson = JSONObject(result)
 

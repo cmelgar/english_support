@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.englishsupport.R
 import com.example.englishsupport.Word
 import com.example.englishsupport.api.getImageUrl
 import com.example.englishsupport.databinding.FragmentDetailBinding
 import com.example.englishsupport.databinding.FragmentWordBinding
 import com.example.englishsupport.ui.DashboardViewModel
+import com.example.englishsupport.ui.MerriamWordsStatus
 import com.squareup.picasso.Picasso
 
 class WordFragment : Fragment() {
@@ -39,13 +41,17 @@ class WordFragment : Fragment() {
 
         viewModel.getImageFromWord(word.word)
 
-        viewModel.wordImageUrl.observe(viewLifecycleOwner, Observer {
+        viewModel.wordImageUrl.observe(viewLifecycleOwner, {
             it?.apply {
                 Picasso.get()
                     .load(it).into(binding.wordImage)
             }
-
+            viewModel.setLoadingStatusDone()
         })
+
+        binding.backButton.setOnClickListener {
+            findNavController().navigate(WordFragmentDirections.actionWordFragmentToMainFragment())
+        }
 
 
         return binding.root

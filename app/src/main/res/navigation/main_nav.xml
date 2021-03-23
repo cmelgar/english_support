@@ -20,5 +20,10 @@
         <argument
             android:name="selectedWord"
             app:argType="com.example.englishsupport.Word" />
+        <action
+            android:id="@+id/action_wordFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

@@ -46,7 +46,6 @@ class MainFragment : Fragment() {
 
         val adapter = WordListAdapter(WordClickListener {
             findNavController().navigate(MainFragmentDirections.actionMainFragmentToWordFragment(it))
-            Toast.makeText(context, "Hey", Toast.LENGTH_SHORT).show()
         })
 
         binding.wordRecycler.adapter = adapter
@@ -104,7 +103,6 @@ class MainFragment : Fragment() {
                 .let { results ->
                 results?.get(0)
             }
-            System.out.println(spokenText)
             binding.wordText.setText(spokenText)
         }
         super.onActivityResult(requestCode, resultCode, data)

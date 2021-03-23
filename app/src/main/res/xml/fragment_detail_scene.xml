@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint android:id="@+id/word_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_margin"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint android:id="@+id/definition_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            app:layout_constraintBaseline_toBaselineOf="@+id/definition_text"
+            app:layout_constraintStart_toEndOf="parent"/>
+<!--        <Constraint android:id="@+id/definition_text" />-->
+        <Constraint android:id="@+id/synonyms_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            app:layout_constraintBaseline_toBaselineOf="@+id/synonyms_text"
+            app:layout_constraintStart_toEndOf="parent"/>
+<!--        <Constraint android:id="@+id/synonyms_text" />-->
+        <Constraint android:id="@+id/antonyms_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/horizontal_margin"
+            app:layout_constraintBaseline_toBaselineOf="@+id/antonyms_text"
+            app:layout_constraintStart_toEndOf="parent"/>
+<!--        <Constraint android:id="@+id/antonyms_text" />-->
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint android:id="@+id/word_text"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/vertical_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Constraint android:id="@+id/definition_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            app:layout_constraintBaseline_toBaselineOf="@+id/definition_text"
+            app:layout_constraintStart_toStartOf="parent" />
+<!--        <Constraint android:id="@+id/definition_text" />-->
+        <Constraint android:id="@+id/synonyms_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            app:layout_constraintBaseline_toBaselineOf="@+id/synonyms_text"
+            app:layout_constraintStart_toStartOf="parent" />
+<!--        <Constraint android:id="@+id/synonyms_text" />-->
+        <Constraint android:id="@+id/antonyms_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_margin"
+            app:layout_constraintBaseline_toBaselineOf="@+id/antonyms_text"
+            app:layout_constraintStart_toStartOf="parent"/>
+<!--        <Constraint android:id="@+id/antonyms_text" />-->
+    </ConstraintSet>
+
+    <Transition
+        app:autoTransition="animateToEnd"
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@id/start"
+        app:duration="2000" >
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="0.0"
+                app:framePosition="0"
+                app:motionTarget="@id/word_text"/>
+
+            <KeyAttribute
+                android:alpha="1.0"
+                app:framePosition="100"
+                app:motionTarget="@id/word_text"/>
+
+            <KeyAttribute
+                android:alpha="0.0"
+                app:framePosition="0"
+                app:motionTarget="@id/definition_label"/>
+
+            <KeyAttribute
+                android:alpha="1.0"
+                app:framePosition="100"
+                app:motionTarget="@id/definition_label"/>
+
+            <KeyAttribute
+                android:alpha="0.0"
+                app:framePosition="0"
+                app:motionTarget="@id/synonyms_label"/>
+
+            <KeyAttribute
+                android:alpha="1.0"
+                app:framePosition="100"
+                app:motionTarget="@id/synonyms_label"/>
+
+            <KeyAttribute
+                android:alpha="0.0"
+                app:framePosition="0"
+                app:motionTarget="@id/antonyms_label"/>
+
+            <KeyAttribute
+                android:alpha="1.0"
+                app:framePosition="100"
+                app:motionTarget="@id/antonyms_label"/>
+        </KeyFrameSet>
+
+    </Transition>
+</MotionScene>
