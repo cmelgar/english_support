@@ -25,6 +25,10 @@ class DashboardViewModel (application: Application) : AndroidViewModel(applicati
     val status: LiveData<MerriamWordsStatus>
         get() = _status
 
+    private val _imageStatus = MutableLiveData<MerriamWordsStatus>()
+    val imageStatus: LiveData<MerriamWordsStatus>
+        get() = _imageStatus
+
     private val _word = MutableLiveData<Word>()
     val word: LiveData<Word>
         get() = _word

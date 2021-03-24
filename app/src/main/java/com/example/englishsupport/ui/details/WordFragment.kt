@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -13,6 +14,7 @@ import com.example.englishsupport.R
 import com.example.englishsupport.Word
 import com.example.englishsupport.api.getImageUrl
 import com.example.englishsupport.databinding.FragmentDetailBinding
+import com.example.englishsupport.databinding.FragmentMainBinding
 import com.example.englishsupport.databinding.FragmentWordBinding
 import com.example.englishsupport.ui.DashboardViewModel
 import com.example.englishsupport.ui.MerriamWordsStatus
@@ -26,29 +28,35 @@ class WordFragment : Fragment() {
             DashboardViewModel::class.java)
     }
 
+    lateinit var binding: FragmentDetailBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = FragmentDetailBinding.inflate(inflater)
+        binding = FragmentDetailBinding.inflate(inflater)
+
         binding.lifecycleOwner = this
 
-        val word = WordFragmentArgs.fromBundle(requireArguments()).selectedWord
+        binding.viewModel = viewModel
 
-        binding.word = word
+        val wordDetails = WordFragmentArgs.fromBundle(requireArguments()).selectedWord
 
+        viewModel.getImageFromWord(wordDetails.word)
 
-        viewModel.getImageFromWord(word.word)
+        binding.word = wordDetails
 
         viewModel.wordImageUrl.observe(viewLifecycleOwner, {
             it?.apply {
                 Picasso.get()
-                    .load(it).into(binding.wordImage)
+                        .load(it).into(binding.wordImage)
             }
-            viewModel.setLoadingStatusDone()
         })
 
+
+//        viewModel.setLoadingStatusDone()
+        binding.statusImage.visibility = GONE
         binding.backButton.setOnClickListener {
             findNavController().navigate(WordFragmentDirections.actionWordFragmentToMainFragment())
         }
@@ -56,5 +64,4 @@ class WordFragment : Fragment() {
 
         return binding.root
     }
-
 }

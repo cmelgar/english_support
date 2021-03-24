@@ -38,9 +38,10 @@
                 android:layout_marginEnd="@dimen/horizontal_margin"
                 android:hint="@string/pick_text"
                 android:textSize="@dimen/main_word_size"
+                android:inputType="textCapCharacters"
                 app:layout_constraintBaseline_toBaselineOf="@+id/search_button"
                 app:layout_constraintEnd_toStartOf="@+id/search_button"
-                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
                 app:layout_constraintStart_toEndOf="@+id/speaker_button" />
 
             <Button

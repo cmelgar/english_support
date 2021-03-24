@@ -22,7 +22,7 @@ android:id="@+id/layout">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:onClick="@{() -> wordCallback.onClick(word)}"
-        tools:context=".ui.Word"
+        tools:context=".ui.details.WordFragment"
         app:layoutDescription="@xml/fragment_detail_scene">
 
         <TextView
@@ -113,14 +113,17 @@ android:id="@+id/layout">
 
         <ImageView
             android:id="@+id/word_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
             app:layout_constraintTop_toBottomOf="@+id/antonyms_text"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/back_button"
             app:layout_constraintStart_toStartOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            app:layout_constrainedHeight="true"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:contentDescription="@string/referenced_image" />
 
 
         <ProgressBar
@@ -128,6 +131,7 @@ android:id="@+id/layout">
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:indeterminate="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

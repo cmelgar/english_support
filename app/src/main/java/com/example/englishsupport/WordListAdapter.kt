@@ -45,7 +45,6 @@ class WordListAdapter(val clickListener: WordClickListener):
 
     override fun onBindViewHolder(holder: WordListViewHolder, position: Int) {
         holder.bind(clickListener, getItem(position))
-//        holder.bind(clickListener, getItem(position))
     }
 
 }

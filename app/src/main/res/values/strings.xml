@@ -16,4 +16,5 @@
     <string name="start_button">Let\'s get started</string>
     <string name="overview_text">This is an app to search a word using the voice feature or just typing. You can see the meaning,
         a list of synonyms and antonyms and if you click in the word, you can see a referenced image! It\'s true that the image is not the best one on the internet, but it helps to understand the word.</string>
+    <string name="referenced_image">Referenced image for the word</string>
 </resources>
